@@ -4,10 +4,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Join from "../components/Join"
 
-const IndexPage = () => (
+const IndexPage = ({ location }) => (
   <Layout>
     <SEO title="Home" />
-    <Join />
+    <Join location={location} />
   </Layout>
 )
 

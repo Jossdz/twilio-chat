@@ -1,10 +1,19 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { navigate } from "gatsby"
 import useTwilioVideo from "../hooks/use-twillio-video"
 
-function Join() {
+function Join({ location }) {
+  const defaultRoom =
+    (location && location.state && location.state.roomName) || ""
   const [identity, setIdentity] = useState("")
-  const [roomName, setRoomName] = useState("")
+  const [roomName, setRoomName] = useState(defaultRoom)
   const { state, getRoomToken } = useTwilioVideo()
+
+  useEffect(() => {
+    if (state.token && state.roomName) {
+      navigate(`/room/${roomName}`)
+    }
+  }, [state])
 
   const submit = e => {
     e.preventDefault()
